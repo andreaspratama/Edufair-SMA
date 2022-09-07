@@ -34,7 +34,7 @@
                                     <td>{{$i->nama}}</td>
                                     <td>{{$i->asal}}</td>
                                     <td>
-                                        {!! QrCode::format('png')->generate($i->link); !!}
+                                        {!! QrCode::generate($i->link); !!}
                                     </td>
                                     <td>2011/04/25</td>
                                 </tr>
