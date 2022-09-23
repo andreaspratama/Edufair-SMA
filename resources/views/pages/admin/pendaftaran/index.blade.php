@@ -109,24 +109,10 @@
                                 <th>No Absen</th>
                                 <th>Universitas</th>
                                 <th>Waktu Pendaftaran</th>
-                                <th>Ttd</th>
+                                <th>Foto</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($items as $i)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$i->nama}}</td>
-                                    <td>{{$i->kelas}}</td>
-                                    <td>{{$i->noabsen}}</td>
-                                    <td>{{$i->universitas}}</td>
-                                    <td>{{$i->waktu}}</td>
-                                    <td>
-                                        <img src="{{Storage::url($i->signed)}}" alt="" class="img-thumbnail" style="width: 200px">
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -142,12 +128,45 @@
 @endpush
 
 @push('addon-script')
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        var datatable = $('#tablePendaftar').DataTable({
+            processing: true,
+            serverSide: true,
+            ordering: true,
+            searcable: true,
+            order: [[1, 'desc']],
+            ajax: {
+                url: '{!! url()->current() !!}',
+            },
+            columns: [
+                {
+                    "data": null,
+                    "sortable": false,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1
+                    }
+                },
+                { data: 'nama', name: 'nama' },
+                { data: 'kelas', name: 'kelas' },
+                { data: 'universitas', name: 'universitas' },
+                { data: 'noabsen', name: 'noabsen' },
+                { data: 'signed', name: 'signed' },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searcable: true,
+                    width: '15%'
+                },
+            ]
+        })
+    </script>
     <script>
         $(document).ready(function () {
             $('#tablePendaftar').DataTable();
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 @endpush

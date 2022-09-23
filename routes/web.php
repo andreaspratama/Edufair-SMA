@@ -48,15 +48,16 @@ use App\Http\Controllers\Depan\UdinusController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::middleware(['auth', 'admin'])->group(function(){
     Route::prefix('admin')->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
         Route::resource('boot', BootController::class);
         Route::get('pendaftaran', [PendaftaranController::class, 'index'])->name('daftar');
+        Route::delete('pendaftaranHapus/{id}', [PendaftaranController::class, 'hapus'])->name('hapus');
         Route::get('pendaftaran/pilih/{universitas}/{kelas}', [PendaftaranController::class, 'pilih'])->name('daftarPilih');
         Route::get('pendaftaran/pilihkampus/{universitas}', [PendaftaranController::class, 'pilihKampus'])->name('daftarPilihKampus');
         Route::get('pendaftaran/pilihkelas/{kelas}', [PendaftaranController::class, 'pilihKelas'])->name('daftarPilihKelas');
@@ -131,4 +132,4 @@ Route::get('pendaftaran/sukses', [PendaftaranController::class, 'sukses'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Laravel Signature Pad Example - MyNotePaper.com</title>
+    <title>Edufair SMA Kristen YSKI</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -21,52 +21,100 @@
         form {
             font-family: 'Poppins', sans-serif;
         }
+        .gambar img {
+            width: 700px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body class="bg-primary">
     <div class="container">
         <div class="row">
-            <div class="col-md-7 offset-md-3 mt-5 mb-5 ml-auto mr-auto">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Edufair SMA Kristen YSKI - XIAMEN UNIVERSITY</h5>
+            <div class="col-lg-12 gambar align-self-center">
+                <img src="{{url('/gambar/logo_putih.png')}}" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form style="background-color: #fff; padding: 40px; border-radius: 10px" method="POST" action="{{ route('xiamenDaftar') }}" enctype="multipart/form-data">
+                    <h3 style="font-size: 20px">Edufair SMA Kristen YSKI - XIAMEN UNIVERSITY</h3>
+                    @csrf
+                  <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Nama...">
+                    @error('nama')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="kelas">Pilih Kelas</label>
+                    <select class="form-control @error('kelas') is-invalid @enderror" id="kelas" name="kelas">
+                                  <option>-- Pilih Kelas --</option>
+                                  <option value="X 1">X 1</option>
+                                  <option value="X 2">X 2</option>
+                                  <option value="X 3">X 3</option>
+                                  <option value="X 4">X 4</option>
+                                  <option value="X 5">X 5</option>
+                                  <option value="X 6">X 6</option>
+                                  <option value="X 7">X 7</option>
+                                  <option value="XI MIPA 1">XI MIPA 1</option>
+                                  <option value="XI MIPA 2">XI MIPA 2</option>
+                                  <option value="XI IPS 1">XI IPS 1</option>
+                                  <option value="XI IPS 2">XI IPS 2</option>
+                                  <option value="XI IPS 3">XI IPS 3</option>
+                                  <option value="XI BB">XI BB</option>
+                                  <option value="XII MIPA 1">XII MIPA 1</option>
+                                  <option value="XII MIPA 2">XII MIPA 2</option>
+                                  <option value="XII MIPA 3">XII MIPA 3</option>
+                                  <option value="XII IPS 1">XII IPS 1</option>
+                                  <option value="XII IPS 2">XII IPS 2</option>
+                                  <option value="XII IPS 3">XII IPS 3</option>
+                                  <option value="XII BB">XII BB</option>
+                                </select>
+                        @error('kelas')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="kelas">Pilih Kelas</label>
+                    <input type="text" class="form-control @error('noabsen') is-invalid @enderror" id="noabsen" name="noabsen" placeholder="No Absen...">
+                        @error('noabsen')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                  </div>
+                  <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Foto</label>
+                            <input type="file" class="form-control-file @error('signed') is-invalid @enderror" id="exampleFormControlFile1" name="signed">
+                            @error('signed')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="card-body">
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                <span>{{ session('success') }}</span>
-                            </div>
-                        @endif
-                        <form method="POST" action="{{ route('xiamenDaftar') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama...">
-                            </div>
-                            <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas...">
-                            </div>
-                            <div class="form-group">
-                                <label for="noabsen">No Absen</label>
-                                <input type="text" class="form-control" id="noabsen" name="noabsen" placeholder="No Absen...">
-                            </div>
-                            <div class="form-group">
-                                <label>Digital Signature</label>
-                                <br/>
-                                <div id="sig"></div>
-                                <br/><br/>
-                                <button id="clear" class="btn btn-danger btn-sm">Hapus</button>
-                                <textarea id="signature" name="signed" style="display: none"></textarea>
-                            </div>
-                            <button class="btn btn-primary w-100">Simpan</button>
-                            <br/>
-                        </form>
-                    </div>
-                </div>
+                  <button type="submit" class="btn btn-primary">Daftar</button>
+                </form>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12 text-center mt-3">
+            <p1 style="color: #fff; font-size: 18px">&copy; Pusat Pengembangan Akademik & Teknologi 2022</p1>
+        </div>
+    </div>
+    
     <script type="text/javascript">
         var sig = $('#sig').signature({syncField: '#signature', syncFormat: 'PNG'});
         $('#clear').click(function (e) {
@@ -114,80 +162,3 @@
     </script>
 </body>
 </html>
-
-{{-- <html>
-<head>
-    <title>Laravel Signature Pad Tutorial Example - Medikre.com </title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
-  
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet"> 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
-  
-    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-  
-    <style>
-        .kbw-signature { width: 100%; height: 200px;}
-        #sig canvas{
-            width: 100% !important;
-            height: auto;
-        }
-    </style>
-  
-</head>
-<body class="bg-dark">
-<div class="container">
-   <div class="row">
-       <div class="col-md-8 offset-md-3 mt-5 ml-auto mr-auto">
-           <div class="card">
-               <div class="card-header">
-                   <h5>Absensi Universitas Semarang</h5>
-               </div>
-               <div class="card-body">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success  alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">×</button>  
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @endif
-                    <form method="POST" action="{{route('usm.store')}}">
-                        @csrf
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama...">
-                            </div>
-                            <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas...">
-                            </div>
-                            <div class="form-group">
-                                <label for="noabsen">No Absen</label>
-                                <input type="text" class="form-control" id="noabsen" name="noabsen" placeholder="No Absen...">
-                            </div>
-                            <label class="" for="">Tanda Tangan</label>
-                            <br/>
-                            <div id="sig" ></div>
-                            <br/>
-                            <button id="clear" class="btn btn-danger btn-sm">Hapus</button>
-                            <textarea id="signature64" name="signed" style="display: none"></textarea>
-                            <br>
-                            <button class="btn btn-primary mt-2 w-100">Daftar</button>
-                        </div>
-                    </form>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
-<script type="text/javascript">
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-</script>
-</body>
-</html> --}}
